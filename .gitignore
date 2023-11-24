@@ -135,3 +135,7 @@ build/
 # directories from docker containers
 syslog/
 mongodb-data
+
+# Nginx directory
+nginx/conf.d/*
+!nginx/conf.d/default.conf.example
