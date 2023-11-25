@@ -48,7 +48,8 @@ interface facilityProps {
 function Facility({ facility, setFacility }: facilityProps) {
   const tooltip = (
     <Tooltip>
-      Represents the type of application that spawned the message.
+      Represents the type of application that spawned the message. Usually this
+      value is between 16 and 23.
       <br /> <br />
       Pri = 8*facility + severity
     </Tooltip>
