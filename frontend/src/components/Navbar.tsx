@@ -6,7 +6,8 @@ import "../styles/Navbar.css";
 export default function NavBar() {
   return (
     <Navbar
-      expand="lg"
+      expand
+      collapseOnSelect
       style={{ paddingLeft: "15px" /*CSS file doesn't apply padding??*/ }}
     >
       <Navbar.Brand>
