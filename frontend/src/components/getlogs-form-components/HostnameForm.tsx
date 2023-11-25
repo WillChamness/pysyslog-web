@@ -7,6 +7,7 @@ import Tooltip from "react-bootstrap/Tooltip";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import { ChangeEvent, MouseEvent, useState } from "react";
 import { validateHostname } from "../../SyslogValidator";
+import "../../styles/RowSeparator.css";
 
 // global to be injected after build time during production
 declare global {
@@ -103,12 +104,12 @@ function HostnameForm({ setLogs }: HostnameFormProps) {
               <Form.Label htmlFor="hostname-input">Hostname:</Form.Label>
             </Col>
           </Row>
-          <Row>
-            <Col className="col-7">
+          <Row className="mb-2">
+            <Col className="col-md-7 col-6">
               <OverlayTrigger
                 trigger="focus"
                 overlay={tooltip}
-                placement="left"
+                placement="right"
               >
                 <div>
                   <Form.Control
@@ -124,7 +125,9 @@ function HostnameForm({ setLogs }: HostnameFormProps) {
                 </div>
               </OverlayTrigger>
             </Col>
-            <Col>
+          </Row>
+          <Row>
+            <Col className="col-md-5 col-4">
               <Button
                 type="submit"
                 onClick={handleSubmit}

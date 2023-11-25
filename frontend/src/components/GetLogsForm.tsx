@@ -8,9 +8,9 @@ import LogsTable from "./getlogs-form-components/LogsTable";
 function GetLogsForm() {
   const [logs, setLogs] = useState<string[][]>([[]]);
   return (
-    <Container>
+    <Container fluid="md">
       <Row>
-        <Col className="col-5">
+        <Col className="col-md-5 col-12">
           <HostnameForm setLogs={setLogs} />
         </Col>
       </Row>

@@ -133,7 +133,7 @@ function Hostname({ hostname, setHostname }: HostnameProps) {
   };
 
   return (
-    <Container>
+    <Container fluid>
       <Form.Group>
         <Row>
           <Col className="col-2">

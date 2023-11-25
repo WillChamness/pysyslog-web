@@ -57,7 +57,7 @@ function SyslogInput() {
   }
 
   return (
-    <Container>
+    <Container fluid="lg">
       <form>
         <Row className="mb-4">
           <Col>
@@ -75,7 +75,7 @@ function SyslogInput() {
           </Col>
         </Row>
         <Row className="row-separator">
-          <Col className="col-5">
+          <Col className="col-md-5 col-12">
             <Header
               date={date}
               setDate={setDate}
@@ -87,7 +87,7 @@ function SyslogInput() {
           </Col>
         </Row>
         <Row className="mb-4">
-          <Col className="col-5">
+          <Col className="col-md-5 col-8">
             <Msg
               tag={tag}
               setTag={setTag}
@@ -99,7 +99,7 @@ function SyslogInput() {
           </Col>
         </Row>
         <Row>
-          <Col className="col-4">
+          <Col className="col-md-4 col-7">
             <SyslogPreviewer
               facility={facility}
               severity={severity}
