@@ -12,6 +12,14 @@ import { validateAll } from "../SyslogValidator";
 import "../styles/RowSeparator.css";
 import "../styles/FadeTransition.css";
 
+// global to be injected after build time at production
+declare global {
+  var BROWSER_SYSLOG_API_ENV: {
+    baseUrl: string;
+    apiPath: string;
+  };
+}
+
 /*
  * A wrapper component containing the entire Syslog input form.
  * */
@@ -191,9 +199,9 @@ function sendPostRequest(
 
   // send to the syslog server via the API
   const apiServerUrl: string =
-    import.meta.env.VITE_API_BASE_URL || "http://127.0.0.1:3000";
+    globalThis.BROWSER_SYSLOG_API_ENV.baseUrl || "http://127.0.0.1:3000";
   const apiLocation: string =
-    import.meta.env.VITE_SYSLOG_API_LOCATION || "/api/syslog";
+    globalThis.BROWSER_SYSLOG_API_ENV.apiPath || "/api/syslog";
 
   fetch(apiServerUrl + apiLocation, {
     method: "POST",

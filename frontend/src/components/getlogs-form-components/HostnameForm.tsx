@@ -8,6 +8,14 @@ import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import { ChangeEvent, MouseEvent, useState } from "react";
 import { validateHostname } from "../../SyslogValidator";
 
+// global to be injected after build time during production
+declare global {
+  var BROWSER_SYSLOG_API_ENV: {
+    baseUrl: string;
+    apiPath: string;
+  };
+}
+
 const FACILITIES: string[] = [
   "Kernel (0)",
   "User-level (1)",
@@ -153,10 +161,10 @@ async function getLogs(
   else getAllLogs = false;
 
   // get the data from the API
-  const apiServerUrl: string =
-    import.meta.env.VITE_API_BASE_URL || "http://127.0.0.1:3000";
-  const apiLocation: string =
-    import.meta.env.VITE_SYSLOG_API_LOCATION || "/api/syslog";
+  const apiServerUrl =
+    globalThis.BROWSER_SYSLOG_API_ENV.baseUrl || "http://127.0.0.1";
+  const apiLocation =
+    globalThis.BROWSER_SYSLOG_API_ENV.apiPath || "/api/syslog";
 
   const response = await fetch(
     `${apiServerUrl}${apiLocation}${getAllLogs ? "" : "/" + hostname}`,
