@@ -25,6 +25,14 @@ export default function NavBar() {
             Get Logs
           </Link>
         </Nav.Link>
+        <Nav.Link
+          className="navlink"
+          href="https://github.com/WillChamness/pysyslog-server#bsd-syslog-overview"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          About
+        </Nav.Link>
       </Navbar.Collapse>
     </Navbar>
   );
