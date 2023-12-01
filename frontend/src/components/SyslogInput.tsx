@@ -2,7 +2,7 @@ import Pri from "./syslog-input-components/Pri";
 import Header from "./syslog-input-components/Header";
 import Msg from "./syslog-input-components/Msg";
 import SyslogPreviewer from "./syslog-input-components/SyslogPreviewer";
-import { useState, MouseEvent } from "react";
+import { useState, MouseEvent, useRef } from "react";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -36,6 +36,7 @@ function SyslogInput() {
   const [showingAlert, setShowingAlert] = useState(false);
   const [status, setStatus] = useState("danger");
   const [submitCounter, setSubmitCounter] = useState(0);
+  const alertRef = useRef<HTMLDivElement>(null);
 
   function handleSubmit(event: MouseEvent) {
     event.preventDefault();
@@ -116,9 +117,12 @@ function SyslogInput() {
               variant="info"
               type="submit"
               onClick={(event: MouseEvent) => {
-                handleSubmit(event);
+                // refresh alert
                 setShowingAlert(false);
                 setShowingAlert(true);
+                handleSubmit(event);
+                // if alert is not showing, need to wait for transition animation before scrolling
+                setTimeout(() => alertRef.current?.scrollIntoView(), 0.5);
               }}
             >
               Submit
@@ -127,7 +131,7 @@ function SyslogInput() {
         </Row>
         <Row>
           <Col className="col-5">
-            <Alert show={showingAlert} variant={status}>
+            <Alert ref={alertRef} show={showingAlert} variant={status}>
               <Alert.Heading>
                 <p>{`${apiMessage}${submitCounter === 1 ? "" : " x" + submitCounter
                   }`}</p>

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import generateSyslog from "../../SyslogValidator";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
@@ -27,7 +27,9 @@ function SyslogPreviewer({
   content,
   separateWithSpace,
 }: SyslogPreviewerProps) {
-  const [output, setOutput] = useState(<></>);
+  const [output, setOutput] = useState("");
+  const validationResultRef = useRef<HTMLParagraphElement>(null);
+
   const handleClick = () => {
     /*
      * Handler for the preview button.
@@ -45,26 +47,18 @@ function SyslogPreviewer({
       content,
       separateWithSpace,
     );
-    let newOutput = <></>;
+    let newOutput = "";
 
     // Case 1: there are errors
-    if (Array.isArray(validationResult)) {
-      newOutput = <p>Invalid message</p>;
-    }
+    if (Array.isArray(validationResult)) newOutput = "Invalid message";
     // Case 2: there are no errors
-    else {
-      newOutput = (
-        <Container>
-          <Row>
-            <Col>
-              <p>{validationResult}</p>
-            </Col>
-          </Row>
-        </Container>
-      );
-    }
+    else newOutput = validationResult;
 
     setOutput(newOutput);
+
+    // scroll down to result after button press for convinience
+    // wait 0.5 seconds to render as a precaution
+    setTimeout(() => validationResultRef.current?.scrollIntoView(), 0.5);
   };
 
   // actual render on the screen
@@ -77,7 +71,11 @@ function SyslogPreviewer({
           </Button>
         </Col>
       </Row>
-      <Row className="row-separator">{output}</Row>
+      <Row className="row-separator" style={{ marginTop: "10px" }}>
+        <p ref={validationResultRef} id="syslog-validation-result">
+          {output}
+        </p>
+      </Row>
     </Container>
   );
 }
