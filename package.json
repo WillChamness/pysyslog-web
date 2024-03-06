@@ -6,8 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon server.ts",
-    "dev-docker": "sudo docker-compose down; sudo docker image rm pysyslog-web-api:latest; npx tsc && sudo docker-compose up -d",
-    "build-docker": "sudo docker-compose down; sudo docker image rm pysyslog-web-api:latest; npx tsc && sudo docker-compose build",
+    "dev-docker": "sudo docker-compose down; sudo docker image rm pysyslog-web-nginx:latest; sudo docker image rm pysyslog-web-api:latest; npx tsc && sudo docker-compose up -d",
+    "build-docker": "sudo docker-compose down; sudo docker image rm pysyslog-web-nginx:latest; sudo docker image rm pysyslog-web-api:latest; npx tsc && sudo docker-compose build",
     "build": "npx tsc"
   },
   "keywords": [],
